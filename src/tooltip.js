@@ -137,7 +137,8 @@ class Tooltip extends Component {
   }
 
   componentDidMount() {
-    Dimensions.addEventListener('change', this.updateWindowDims);
+    //Dimensions.addEventListener('change', this.updateWindowDims);
+    this.dimensionsSubscription = Dimensions.addEventListener('change', this.updateWindowDims);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -157,7 +158,8 @@ class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener('change', this.updateWindowDims);
+    //Dimensions.removeEventListener('change', this.updateWindowDims);
+    this.dimensionsSubscription?.remove();
     if (this.interactionPromise) {
       this.interactionPromise.cancel();
     }
